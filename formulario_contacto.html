@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulario de Contacto</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f2f2f2; padding: 20px; }
+    form { background: white; padding: 20px; border-radius: 8px; max-width: 500px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    input, textarea { width: 100%; padding: 10px; margin: 10px 0; border-radius: 4px; border: 1px solid #ccc; }
+    button { background-color: #28a745; color: white; padding: 10px; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background-color: #218838; }
+    .whatsapp-btn { background-color: #25d366; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+<h2 style="text-align:center;">Formulario de Contacto</h2>
+
+<form id="contact-form">
+  <label for="name">Nombre:</label>
+  <input type="text" id="name" name="name" required />
+
+  <label for="email">Correo electrónico:</label>
+  <input type="email" id="email" name="email" required />
+
+  <label for="message">Mensaje:</label>
+  <textarea id="message" name="message" rows="5" required></textarea>
+
+  <!-- Acción futura cuando configures tu correo con Formspree u otro -->
+  <button type="submit">Enviar</button>
+
+  <!-- Botón de WhatsApp -->
+  <button type="button" class="whatsapp-btn" onclick="enviarWhatsApp()">
+    Enviar por WhatsApp
+  </button>
+</form>
+
+<script>
+  const numero = '51936002683'; // Tu número de WhatsApp
+
+  function enviarWhatsApp() {
+    const nombre = document.getElementById('name').value;
+    const correo = document.getElementById('email').value;
+    const mensaje = document.getElementById('message').value;
+    
+    if (!nombre || !correo || !mensaje) {
+      alert('Por favor completa todos los campos.');
+      return;
+    }
+
+    const texto = `Hola, soy ${nombre}. Mi correo es ${correo}. Mensaje: ${mensaje}`;
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+    window.open(url, '_blank');
+  }
+
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Cuando configures tu correo, aquí se enviará por email también. Por ahora, usa WhatsApp.');
+  });
+</script>
+
+</body>
+</html>
